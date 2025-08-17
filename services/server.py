@@ -10,10 +10,10 @@ dal.connect()
 def home():
     return {"message": "hello"}
 
-@app.get("get_people")
+@app.get("/get_people")
 def get_people():
     try:
-        sql_string = "SELECT * FROM Studens"
+        sql_string = "SELECT * FROM students"
         return dal.execute_query(sql_string)
     except Exception as e :
         print(f"erorr {e}  ")
