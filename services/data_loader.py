@@ -1,4 +1,5 @@
 import mysql.connector
+import os
 
 class Dal:
     def __init__(self,
@@ -7,7 +8,7 @@ class Dal:
                  password="appdpass",
                  database="sampledb",
                  port=3306):
-        self.host = host
+        self.host = os.getenv("DB_HOST", host)
         self.user = user
         self.password = password
         self.database = database
