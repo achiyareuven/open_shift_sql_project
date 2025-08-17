@@ -1,0 +1,106 @@
+s" in API group "app.k8s.io" in the namespace "achiya3144-dev"
+
+C:\Users\achiy>oc get all
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+Warning: kubevirt.io/v1 VirtualMachineInstancePresets is now deprecated and will be removed in v2.
+NAME                        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                               AGE
+service/modelmesh-serving   ClusterIP   None         <none>        8033/TCP,8008/TCP,8443/TCP,2112/TCP   23s
+Error from server (Forbidden): applications.app.k8s.io is forbidden: User "achiya3144" cannot list resource "applications" in API group "app.k8s.io" in the namespace "achiya3144-dev"
+
+C:\Users\achiy>oc apply -f "C:\Users\achiy\source\repos\IDF_OOP\depl_sql.yaml"
+persistentvolumeclaim/mysql-pvc unchanged
+deployment.apps/mysql-deployment created
+service/mysql-service created
+
+C:\Users\achiy>oc delete all --all -n achiya3144-dev
+service "modelmesh-serving" deleted
+service "mysql-service" deleted
+deployment.apps "mysql-deployment" deleted
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+Warning: kubevirt.io/v1 VirtualMachineInstancePresets is now deprecated and will be removed in v2.
+Error from server (Forbidden): applications.app.k8s.io is forbidden: User "achiya3144" cannot list resource "applications" in API group "app.k8s.io" in the namespace "achiya3144-dev"
+
+C:\Users\achiy>oc apply -f "C:\Users\achiy\source\repos\IDF_OOP\depl_sql.yaml"
+persistentvolumeclaim/mysql-pvc unchanged
+deployment.apps/mysql-deployment created
+service/mysql-service created
+
+C:\Users\achiy>oc get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+mysql-deployment-75b95dc55f-5s8cg   1/1     Running   0          29s
+
+C:\Users\achiy>oc rsh mysql-deployment-75b95dc55f-5s8cg
+sh-5.1$ mysql --user=appduser --password=appdpass sampledb
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.43 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show datadases
+    -> show datadases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datadases
+show datadases' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| sampledb           |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> use sampledb
+Database changed
+mysql>
+C:\Users\achiy>CREATE TABLE students (
+'CREATE' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\achiy>    id INT AUTO_INCREMENT PRIMARY KEY,
+'id' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\achiy>    first_name VARCHAR(50) NOT NULL,
+'first_name' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\achiy>    last_name  VARCHAR(50) NOT NULL
+'last_name' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\achiy>);CREATE TABLE Students id INT AUTO_INCREMENT PRIMARY KEY first_name VARCHAR(50) NOT NULL  last_name  VARCHAR(50) NOT NULL
+C:\Users\achiy>oc rsh mysql-deployment-75b95dc55f-5s8cg
+sh-5.1$ mysql --user=appduser --password=appdpass sampledb
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.43 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE TABLE students (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     first_name VARCHAR(50) NOT NULL,
+    ->     last_name  VARCHAR(50) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO students (first_name,last_name) VALUES ('ahiya','reuven');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
